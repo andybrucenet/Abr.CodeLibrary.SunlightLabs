@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abr.CodeLibrary.SunlightLabs", "..\..\CSharp\CodeLibrary\Abr.CodeLibrary.SunlightLabs\Abr.CodeLibrary.SunlightLabs.csproj", "{10D379D2-9964-40E9-A0AC-8BBF74383FC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abr.CodeLibrary.SunlightLabs.Test", "..\..\CSharp\CodeLibrary\Abr.CodeLibrary.SunlightLabs.Test\Abr.CodeLibrary.SunlightLabs.Test.csproj", "{5F2F7E0D-099A-448D-B475-004BA4FDEDB1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{10D379D2-9964-40E9-A0AC-8BBF74383FC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10D379D2-9964-40E9-A0AC-8BBF74383FC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10D379D2-9964-40E9-A0AC-8BBF74383FC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10D379D2-9964-40E9-A0AC-8BBF74383FC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F2F7E0D-099A-448D-B475-004BA4FDEDB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F2F7E0D-099A-448D-B475-004BA4FDEDB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F2F7E0D-099A-448D-B475-004BA4FDEDB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F2F7E0D-099A-448D-B475-004BA4FDEDB1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

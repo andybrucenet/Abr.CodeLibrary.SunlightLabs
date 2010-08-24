@@ -1,2 +1,56 @@
-Just pull down the deployment solution, rebuild, add a Sunlight Labs key
-and you're just about done. Very tired right now, no more typee typee...
+README - Abr.CodeLibrary.SunlightLabs
+-------------------------------------
+Last Modified: 24 AUG 2010, ABr
+
+This project allows you to integrate with the Sunlight Labs Congress API
+(see http://services.sunlightlabs.com/docs/Sunlight_Congress_API/).
+
+To use the project:
+
+1. Download the code from GitHub
+
+2. Precompiled DotNet 35 binaries are under the bin folder. All you
+   need is the Abr.CodeLibrary.SunlightLabs.dll assembly. Just put a
+   reference to it in your own project.
+
+3. You can open the source code and rebuild the project if you want.
+   The DotNet 35 solution is under the src\Deployment\Abr.CodeLibrary.SunlightLabs
+   folder. It's called Abr.CodeLibrary.SunlightLabs.sln.
+
+4. I built NUnit tests, you'll need to download the NUnit package if
+   you want to run the tests (the test assembly is in the bin folder). Also, 
+   Abr.CodeLibrary.SunlightLabs.Test.dll.config will need to be updated with
+   *your* Sunlight Labs API key. Just open the file and you'll see where to
+   put the key.
+
+Usage of the API is really simple. To read legislative data (for example,
+to look for Barack Obama):
+
+using Abr.CodeLibrary.SunlightLabs;
+using Abr.CodeLibrary.SunlightLabs.DataStructures;
+
+public class ReadBaracksData {
+  public static void Main(string[] args) {
+    // create the request object
+    var req = new Legislators("your API key here");
+
+    // call the Get function for all legislators (not just current ones)
+    var rsp = req.Get(true, Legislator.Props.lastname, "obama");
+    System.Console.WriteLine("We found: {0} {1}", rsp.firstname, rsp.lastname);
+  }
+}
+
+That's it--if you go to the Sunlight Labs Web site and look at the API
+documentation they use, you'll find that I tried to keep the C# code as close
+to their examples as possible. The JSON data returned from the API calls is
+translated to C# objects using JSON.Net (http://json.codeplex.com/).
+
+I have C# support for all the APIs (Legislators, Districts, and Committees)
+from the Sunlight Labs site. The only problem I've seen is that the district
+lookup by state and district number only seems to work for the Sunlight example
+of NY-29 (I couldn't get any other states or congressional district numbers to
+return data). Perhaps you can have better luck.
+
+Enjoy!
+
+Andy

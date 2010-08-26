@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abr.CodeLibrary.SunlightLabs.Sl", "..\..\CSharp\CodeLibrary\Abr.CodeLibrary.SunlightLabs.Sl\Abr.CodeLibrary.SunlightLabs.Sl.csproj", "{2BD7E76E-FFA4-404D-90A9-52ECB0DC61AF}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://rmivaptfs001:444/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\..\\CSharp\\CodeLibrary\\Abr.CodeLibrary.SunlightLabs.Sl\\Abr.CodeLibrary.SunlightLabs.Sl.csproj
+		SccProjectName1 = ../../CSharp/CodeLibrary/Abr.CodeLibrary.SunlightLabs.Sl
+		SccLocalPath1 = ..\\..\\CSharp\\CodeLibrary\\Abr.CodeLibrary.SunlightLabs.Sl
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2BD7E76E-FFA4-404D-90A9-52ECB0DC61AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BD7E76E-FFA4-404D-90A9-52ECB0DC61AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BD7E76E-FFA4-404D-90A9-52ECB0DC61AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BD7E76E-FFA4-404D-90A9-52ECB0DC61AF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

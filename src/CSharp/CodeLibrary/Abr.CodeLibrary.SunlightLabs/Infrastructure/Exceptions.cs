@@ -8,7 +8,12 @@ namespace Abr.CodeLibrary.SunlightLabs.Infrastructure
   /// <summary>
   /// Base class (under Silverlight, ApplicationException does not exist)
   /// </summary>
-  public class BaseException: ApplicationException
+  public class BaseException:
+#if SILVERLIGHT
+    Exception
+#else
+   ApplicationException
+#endif
   {
     /// <summary>
     /// Uninitialized exception

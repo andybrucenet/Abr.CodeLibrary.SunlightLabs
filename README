@@ -1,6 +1,6 @@
 README - Abr.CodeLibrary.SunlightLabs
 -------------------------------------
-Last Modified: 24 AUG 2010, ABr
+Last Modified: 26 AUG 2010, ABr
 
 This project allows you to integrate with the Sunlight Labs Congress API
 (see http://services.sunlightlabs.com/docs/Sunlight_Congress_API/).
@@ -11,7 +11,9 @@ To use the project:
 
 2. Precompiled DotNet 35 binaries are under the bin folder. All you
    need is the Abr.CodeLibrary.SunlightLabs.dll assembly. Just put a
-   reference to it in your own project.
+   reference to it in your own project. For Silverlight, use the
+   Abr.CodeLibrary.SunlightLabs.Sl.dll assembly (it works just the
+   same as DotNet 35 version).
 
 3. You can open the source code and rebuild the project if you want.
    The DotNet 35 solution is under the src\Deployment\Abr.CodeLibrary.SunlightLabs
@@ -21,7 +23,8 @@ To use the project:
    you want to run the tests (the test assembly is in the bin folder). Also, 
    Abr.CodeLibrary.SunlightLabs.Test.dll.config will need to be updated with
    *your* Sunlight Labs API key. Just open the file and you'll see where to
-   put the key.
+   put the key. I do not have tests for the Silverlight version (but I'm
+   using it in production code anyway).
 
 Usage of the API is really simple. To read legislative data (for example,
 to look for Barack Obama):
@@ -39,6 +42,10 @@ public class ReadBaracksData {
     System.Console.WriteLine("We found: {0} {1}", rsp.firstname, rsp.lastname);
   }
 }
+
+Please note for Silverlight that you must call this from a *separate
+thread* than the UI thread. The call to req.Get above blocks until the
+Web service returns.
 
 That's it--if you go to the Sunlight Labs Web site and look at the API
 documentation they use, you'll find that I tried to keep the C# code as close

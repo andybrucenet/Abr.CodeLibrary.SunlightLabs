@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2BD7E76E-FFA4-404D-90A9-52ECB0DC61AF}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Abr.CodeLibrary.SunlightLabs.Sl</RootNamespace>
+    <AssemblyName>Abr.CodeLibrary.SunlightLabs.Sl</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn>0618</NoWarn>
+    <DocumentationFile>Bin\Debug\Abr.CodeLibrary.SunlightLabs.Sl.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn>0618</NoWarn>
+    <DocumentationFile>Bin\Release\Abr.CodeLibrary.SunlightLabs.Sl.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Abr.CodeLibrary.SunlightLabs.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="Newtonsoft.Json.Silverlight">
+      <HintPath>..\..\..\Dependencies\Json.NET\Json35r8\Bin\Silverlight\Newtonsoft.Json.Silverlight.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Browser" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Abr.CodeLibrary.SunlightLabs\Committees.cs">
+      <Link>Committees.cs</Link>
+    </Compile>
+    <Compile Include="..\Abr.CodeLibrary.SunlightLabs\DataStructures\Committee.cs">
+      <Link>DataStructures\Committee.cs</Link>
+    </Compile>
+    <Compile Include="..\Abr.CodeLibrary.SunlightLabs\DataStructures\District.cs">
+      <Link>DataStructures\District.cs</Link>
+    </Compile>
+    <Compile Include="..\Abr.CodeLibrary.SunlightLabs\DataStructures\Globals.cs">
+      <Link>DataStructures\Globals.cs</Link>
+    </Compile>
+    <Compile Include="..\Abr.CodeLibrary.SunlightLabs\DataStructures\Legislator.cs">
+      <Link>DataStructures\Legislator.cs</Link>
+    </Compile>
+    <Compile Include="..\Abr.CodeLibrary.SunlightLabs\Districts.cs">
+      <Link>Districts.cs</Link>
+    </Compile>
+    <Compile Include="..\Abr.CodeLibrary.SunlightLabs\Infrastructure\Exceptions.cs">
+      <Link>Infrastructure\Exceptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Abr.CodeLibrary.SunlightLabs\Infrastructure\IRequestParam.cs">
+      <Link>Infrastructure\IRequestParam.cs</Link>
+    </Compile>
+    <Compile Include="..\Abr.CodeLibrary.SunlightLabs\Infrastructure\JSONResponse.cs">
+      <Link>Infrastructure\JSONResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\Abr.CodeLibrary.SunlightLabs\Infrastructure\RequestParam.cs">
+      <Link>Infrastructure\RequestParam.cs</Link>
+    </Compile>
+    <Compile Include="..\Abr.CodeLibrary.SunlightLabs\Infrastructure\RESTReq.cs">
+      <Link>Infrastructure\RESTReq.cs</Link>
+    </Compile>
+    <Compile Include="..\Abr.CodeLibrary.SunlightLabs\Legislators.cs">
+      <Link>Legislators.cs</Link>
+    </Compile>
+    <Compile Include="..\Abr.CodeLibrary.SunlightLabs\Verbs.cs">
+      <Link>Verbs.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Abr.CodeLibrary.SunlightLabs.snk" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

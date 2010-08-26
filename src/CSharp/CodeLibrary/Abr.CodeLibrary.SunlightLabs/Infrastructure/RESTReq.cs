@@ -92,6 +92,137 @@ namespace Abr.CodeLibrary.SunlightLabs.Infrastructure
       return new Uri(url);
     }
 
+#if SILVERLIGHT
+    /// <summary>
+    /// Try invoking the service via a direct call
+    /// </summary>
+    /// <param name="requestUri">URI to invoke</param>
+    protected virtual System.IO.Stream InvokeSilverlight(Uri requestUri)
+    {
+      System.Net.HttpWebResponse webResponse = null;
+
+      string flag = "";
+      try
+      {
+        // TODO: drive from config??
+        const int DEFAULT_TIMEOUT = 1 * 30 * 1000;
+
+        flag = "create_request";
+        var webRequest = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(requestUri);
+
+        // setup handler
+        System.Exception lastException = null;
+#if SILVERLIGHT_SUPPORTS_WAITFORSINGLEOBJECT
+        System.Threading.ManualResetEvent allDone = new System.Threading.ManualResetEvent(false);
+#else
+        bool requestedCompleted = false;
+        object requestCompletedMutex = new Object();
+#endif
+        flag = "create_response";
+        IAsyncResult asyncResult = webRequest.BeginGetResponse(
+          delegate(IAsyncResult result)
+          {
+            try
+            {
+              webResponse = (System.Net.HttpWebResponse)webRequest.EndGetResponse(result);
+            }
+            catch (System.Exception ex)
+            {
+              lastException = ex;
+            }
+            finally
+            {
+              try
+              {
+#if SILVERLIGHT_SUPPORTS_WAITFORSINGLEOBJECT
+                rallDone.Set();
+#else
+                // no WAITFORSINGLEOBJECT, so we set our flag
+                lock (requestCompletedMutex)
+                {
+                  requestedCompleted = true;
+                } //lock
+              }
+              catch
+              {
+                // can't do anything here...too bad
+              }
+            }
+#endif
+          }
+          , null
+        );
+
+#if SILVERLIGHT_SUPPORTS_WAITFORSINGLEOBJECT
+        // setup a timeout
+        flag = "wait_single_object";
+        System.Threading.ThreadPool.RegisterWaitForSingleObject(
+          asyncResult.AsyncWaitHandle,
+          delegate(object state, bool timedOut)
+          {
+            if (timedOut)
+            {
+              webRequest.Abort();
+            } //if
+          },
+          webRequest, DEFAULT_TIMEOUT, true
+        );
+
+        // wait for the response
+        flag = "wait_one";
+        allDone.WaitOne();
+#else
+        // seconds to wait
+        int counter = 0;
+        int limit = DEFAULT_TIMEOUT / 100;
+        while (counter < limit)
+        {
+          // sleep
+          try
+          {
+            System.Threading.Thread.Sleep(100);
+          }
+          catch (System.Threading.ThreadAbortException)
+          {
+            // capture this, return now, no exception passed up
+          }
+          catch (Exception)
+          {
+            // same notes as above
+          } //try
+
+          lock (requestCompletedMutex)
+          {
+            if (requestedCompleted) break;
+          } //lock
+          ++counter;
+        } //while
+        if (!requestedCompleted)
+        {
+          // end the request
+          try { webRequest.Abort(); }
+          catch { }
+
+          // tell caller we failed
+          throw new Exception("Timeout waiting for " + requestUri);
+        } //if
+#endif
+
+        // if we had an exception, we're done
+        if (lastException != null) throw lastException;
+
+        // read the result
+        flag = "access_response_stream";
+        var stream = webResponse.GetResponseStream();
+        return stream;
+      }
+      catch (Exception ex)
+      {
+        throw new Exception("Problem at " + flag + ": " + ex.Message, ex);
+      }
+    } //InvokeViaDirect
+#endif
+
     /// <summary>
     /// Given an input URI, return the response stream that should contain data
     /// </summary>
@@ -101,31 +232,34 @@ namespace Abr.CodeLibrary.SunlightLabs.Infrastructure
     {
       try
       {
+#if !SILVERLIGHT
         // get the response
         var request = System.Net.WebRequest.Create(requestUri);
 
         // extract the response stream
         return request.GetResponse().GetResponseStream();
+#else
+        // get the response
+        var response = InvokeSilverlight(requestUri);
+        return response;
+#endif
       }
       catch (System.Net.WebException ex)
       {
-        if (ex.Status == System.Net.WebExceptionStatus.ProtocolError)
+        var response = ex.Response as System.Net.HttpWebResponse;
+        if (response != null)
         {
-          var response = ex.Response as System.Net.HttpWebResponse;
-          if (response != null)
+          if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
           {
-            if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
-            {
-              throw new AuthenticationException("Missing or invalid SunlightLabs API key", ex);
-            }
-            else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
-            {
-              throw new NotFoundException(response.StatusDescription, ex);
-            }
-            else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
-            {
-              throw new ErrorException(response.StatusDescription, ex);
-            }
+            throw new AuthenticationException("Missing or invalid SunlightLabs API key", ex);
+          }
+          else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+          {
+            throw new NotFoundException(response.StatusDescription, ex);
+          }
+          else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+          {
+            throw new ErrorException(response.StatusDescription, ex);
           }
         }
 
